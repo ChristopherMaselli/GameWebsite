@@ -2,11 +2,12 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Login from "./Components/JSX/Login";
+import LoginRegistration from "./Components/JSX/LoginRegistration";
 
 function App() {
   return (
     <div className="App">
-      <Login></Login>
+      <LoginRegistration></LoginRegistration>
     </div>
   );
 }
