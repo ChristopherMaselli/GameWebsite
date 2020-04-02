@@ -25,9 +25,10 @@ const LoginRegistration = props => {
   };
 
   const handleLogin = async () => {
+    console.log("Is it working?");
     const obj = {
-      user: "Hi there",
-      password: "Hello"
+      username: userInfo.usernameLogin,
+      password: userInfo.passwordLogin
     };
 
     await axios.post("https://localhost:5001/api/Users/", obj);
