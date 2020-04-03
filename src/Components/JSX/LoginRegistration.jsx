@@ -9,7 +9,7 @@ const LoginRegistration = props => {
   const [userInfo, setUserInfo] = useState({
     usernameReg: "",
     passwordReg: "",
-    email: "",
+    emailAddress: "",
     usernameLogin: "",
     passwordLogin: ""
   });
@@ -36,12 +36,12 @@ const LoginRegistration = props => {
 
   const handleRegister = async () => {
     const obj = {
-      user: userInfo.usernameLogin,
-      password: userInfo.passwordLogin,
-      email: userInfo.email
+      username: userInfo.usernameReg,
+      password: userInfo.passwordReg,
+      emailAddress: userInfo.emailAddress
     };
 
-    await axios.post("https://localhost:5001/api/Users/", obj);
+    await axios.post("https://localhost:5001/api/Registration", obj);
   };
 
   const handleSubmit = async e => {
@@ -154,11 +154,11 @@ const LoginRegistration = props => {
                   <Form.Label className="youmail"> Your email</Form.Label>
                   <Form.Control
                     as="input"
-                    name="email"
+                    name="emailAddress"
                     required="required"
                     ref={emailRef}
                     placeholder="mysupermail@mail.com"
-                    value={userInfo.email}
+                    value={userInfo.emailAddress}
                     onChange={emailRef => handleChange(emailRef)}
                   />
                 </Form.Group>
@@ -176,9 +176,9 @@ const LoginRegistration = props => {
                   />
                 </Form.Group>
 
-                <p className="signin button">
-                  <input type="submit" value="Sign up" />
-                </p>
+                <Button variant="primary" onClick={handleRegister}>
+                  SignUp
+                </Button>
                 <p className="change_link">
                   Already a member ?
                   <a href="#tologin" className="to_register">
