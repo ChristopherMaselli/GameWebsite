@@ -5,16 +5,16 @@ import { Button, Col, Form } from "react-bootstrap";
 import axios from "axios";
 import * as userService from "../../Services/userService";
 
-const LoginRegistration = props => {
+const LoginRegistration = (props) => {
   const [userInfo, setUserInfo] = useState({
     usernameReg: "",
     passwordReg: "",
     emailAddress: "",
     usernameLogin: "",
-    passwordLogin: ""
+    passwordLogin: "",
   });
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const tempUserInfo = { ...userInfo };
     //const value = e.currentTarget.value;
     const value = e.currentTarget.value;
@@ -25,26 +25,26 @@ const LoginRegistration = props => {
   };
 
   const handleLogin = async () => {
-    console.log("Is it working?");
     const obj = {
       username: userInfo.usernameLogin,
-      password: userInfo.passwordLogin
+      password: userInfo.passwordLogin,
     };
 
-    await axios.post("https://localhost:5001/api/Users/", obj);
+    var token = await axios.post("https://localhost:5001/api/Login", obj);
+    localStorage.setItem("Settings", token.data["token"]);
   };
 
   const handleRegister = async () => {
     const obj = {
       username: userInfo.usernameReg,
       password: userInfo.passwordReg,
-      emailAddress: userInfo.emailAddress
+      emailAddress: userInfo.emailAddress,
     };
 
     await axios.post("https://localhost:5001/api/Registration", obj);
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     console.log(e.currentTarget.name);
     //userService.register(this.state.data);
 
@@ -87,7 +87,7 @@ const LoginRegistration = props => {
                     ref={usernameLoginRef}
                     value={userInfo.usernameLogin}
                     placeholder="myusername or mymail@mail.com"
-                    onChange={usernameLoginRef =>
+                    onChange={(usernameLoginRef) =>
                       handleChange(usernameLoginRef)
                     }
                   />
@@ -101,7 +101,7 @@ const LoginRegistration = props => {
                     ref={passwordLoginRef}
                     value={userInfo.passwordLogin}
                     placeholder="eg. X8df!90EO"
-                    onChange={passwordLoginRef =>
+                    onChange={(passwordLoginRef) =>
                       handleChange(passwordLoginRef)
                     }
                   />
@@ -146,7 +146,7 @@ const LoginRegistration = props => {
                     ref={usernameRegRef}
                     value={userInfo.usernameReg}
                     placeholder="mysuperusername690"
-                    onChange={usernameRegRef => handleChange(usernameRegRef)}
+                    onChange={(usernameRegRef) => handleChange(usernameRegRef)}
                   />
                 </Form.Group>
 
@@ -159,7 +159,7 @@ const LoginRegistration = props => {
                     ref={emailRef}
                     placeholder="mysupermail@mail.com"
                     value={userInfo.emailAddress}
-                    onChange={emailRef => handleChange(emailRef)}
+                    onChange={(emailRef) => handleChange(emailRef)}
                   />
                 </Form.Group>
 
@@ -172,7 +172,7 @@ const LoginRegistration = props => {
                     ref={passwordRegRef}
                     value={userInfo.passwordReg}
                     placeholder="eg. X8df!90EO"
-                    onChange={passwordRegRef => handleChange(passwordRegRef)}
+                    onChange={(passwordRegRef) => handleChange(passwordRegRef)}
                   />
                 </Form.Group>
 
