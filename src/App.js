@@ -4,6 +4,10 @@ import "./App.css";
 import { useEffect } from "react";
 import Login from "./Components/JSX/Login";
 import LoginRegistration from "./Components/JSX/LoginRegistration";
+import UserProfile from "./Components/JSX/UserProfile";
+import Menu from "./Components/JSX/Menu";
+import Header from "./Components/JSX/Header";
+import Footer from "./Components/JSX/Footer";
 import axios from "axios";
 
 function App() {
@@ -22,7 +26,10 @@ function App() {
 
   return (
     <div className="App">
-      <LoginRegistration></LoginRegistration>
+      <Header />
+      <Menu />
+      <LoginRegistration />
+      <Footer />
     </div>
   );
 }

@@ -41,7 +41,12 @@ const LoginRegistration = (props) => {
       emailAddress: userInfo.emailAddress,
     };
 
-    await axios.post("https://localhost:5001/api/Registration", obj);
+    var response = await axios.post(
+      "https://localhost:5001/api/Registration",
+      obj
+    );
+
+    console.log(response.data);
   };
 
   const handleSubmit = async (e) => {
@@ -119,10 +124,7 @@ const LoginRegistration = (props) => {
                   <label>Keep me logged in</label>
                 </p>
                 <p className="login button">
-                  <a
-                    href="http://cookingfoodsworld.blogspot.in/"
-                    target="_blank"
-                  ></a>
+                  <a href="" target="_blank"></a>
                 </p>
                 <p className="change_link">
                   Not a member yet ?

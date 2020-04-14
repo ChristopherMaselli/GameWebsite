@@ -1,3 +1,10 @@
+body {
+  /* background: -webkit-linear-gradient(left, #3931af, #00c6ff); */
+  background: url(https://wallpapercave.com/wp/SVhb78h.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+}
+
 .App {
   text-align: center;
 }
