@@ -1,4 +1,5 @@
 import React from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { useEffect } from "react";
@@ -8,6 +9,7 @@ import UserProfile from "./Components/JSX/UserProfile";
 import Menu from "./Components/JSX/Menu";
 import Header from "./Components/JSX/Header";
 import Footer from "./Components/JSX/Footer";
+import Home from "./Components/JSX/Home";
 import axios from "axios";
 
 function App() {
@@ -24,11 +26,17 @@ function App() {
     }
   });
 
+  const AutoLogin = async () => {
+    const Authenticated = localStorage.getItem("Settings");
+    console.log(Authenticated);
+  };
+
   return (
     <div className="App">
       <Header />
       <Menu />
-      <LoginRegistration />
+      <div>{localStorage.getItem("Settings") ? <UserProfile /> : <Home />}</div>
+
       <Footer />
     </div>
   );

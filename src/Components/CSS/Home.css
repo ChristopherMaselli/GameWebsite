@@ -1,0 +1,14 @@
+.wrapper {
+  height: 100%;
+  width: auto;
+}
+
+.pond {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  margin-top: 7%;
+}
