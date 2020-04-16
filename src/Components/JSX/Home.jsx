@@ -7,6 +7,26 @@ import * as userService from "../../Services/userService";
 import "../CSS/Home.css";
 
 const Home = (props) => {
+  const fetchMyToken = async () => {
+    /*
+    var token = localStorage.getItem("Settings");
+    var message = await axios.post(
+      "https://localhost:5001/api/Login/Token",
+      token.toString()
+    );
+    */
+
+    const obj = {
+      username: "Zoidy",
+      password: "IronhandsBestFriend",
+    };
+
+    var token = await axios.post("https://localhost:5001/api/Login/Token", obj);
+    //localStorage.setItem("Settings", token.data["token"]);
+
+    console.log(token);
+  };
+
   return (
     <div>
       <div>
@@ -20,7 +40,12 @@ const Home = (props) => {
               magna mollis euismod. Donec sed odio dui.{" "}
             </p>
             <p>
-              <a class="btn btn-secondary" href="#" role="button">
+              <a
+                class="btn btn-secondary"
+                href="#"
+                role="button"
+                onClick={() => fetchMyToken()}
+              >
                 View details &raquo;
               </a>
             </p>
