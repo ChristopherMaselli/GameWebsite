@@ -9,20 +9,18 @@ import "../CSS/Home.css";
 const Home = (props) => {
   const fetchMyToken = async () => {
     /*
-    var token = localStorage.getItem("Settings");
+
     var message = await axios.post(
       "https://localhost:5001/api/Login/Token",
       token.toString()
     );
     */
-
+    var token = localStorage.getItem("Settings");
     const obj = {
-      username: "Zoidy",
-      password: "IronhandsBestFriend",
+      token: token,
     };
 
     var token = await axios.post("https://localhost:5001/api/Login/Token", obj);
-    //localStorage.setItem("Settings", token.data["token"]);
 
     console.log(token);
   };
