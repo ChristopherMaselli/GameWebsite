@@ -6,6 +6,28 @@ import axios from "axios";
 import * as userService from "../../Services/userService";
 
 const UserProfile = (props) => {
+
+  const [userInfo, setUserInfo] = useState({
+    Username: "",
+    MemberSince: "",
+    HoursPlayed: "",
+    Subscription: "",
+   });
+
+  useEffect(() => {
+    var details = await axios.post(
+      "https://localhost:5001/api/Data/UserProfile",
+      localStorage.getItem("Settings"))
+    
+  setUserInfo({
+    Username: details.userName,
+    MemberSince: details.memberSince,
+    HoursPlayed: details.hoursPlayed,
+    Subscription: details.subscription,
+  })});
+
+  console.log(userinfo.Username);
+
   return (
     <div className="container emp-profile">
       <form method="post">

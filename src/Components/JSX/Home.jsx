@@ -20,7 +20,10 @@ const Home = (props) => {
       token: token,
     };
 
-    var token = await axios.post("https://localhost:5001/api/Login/Token", obj);
+    var token = await axios.post(
+      "https://localhost:5001/api/Data/UserProfile",
+      obj
+    );
 
     console.log(token);
   };
