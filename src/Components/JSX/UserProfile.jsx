@@ -1,32 +1,51 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../CSS/UserProfile.css";
 import { Button, Col, Form } from "react-bootstrap";
 import axios from "axios";
 import * as userService from "../../Services/userService";
 
 const UserProfile = (props) => {
-
   const [userInfo, setUserInfo] = useState({
-    Username: "",
-    MemberSince: "",
-    HoursPlayed: "",
-    Subscription: "",
-   });
+    username: "",
+    memberSince: "",
+    hoursPlayed: "",
+    subscription: "",
+  });
 
-  useEffect(() => {
+  const fetchDetails = async () => {
+    var token = localStorage.getItem("Settings");
+    const obj = {
+      token: token,
+    };
+
     var details = await axios.post(
       "https://localhost:5001/api/Data/UserProfile",
-      localStorage.getItem("Settings"))
-    
-  setUserInfo({
-    Username: details.userName,
-    MemberSince: details.memberSince,
-    HoursPlayed: details.hoursPlayed,
-    Subscription: details.subscription,
-  })});
+      obj
+    );
 
-  console.log(userinfo.Username);
+    setUserInfo(
+      {
+        Username: details.userName,
+        EmailAddress: details.EmailAddress,
+        MemberSince: details.userData.memberSince,
+        HoursPlayed: details.userData.hoursPlayed,
+        Subscription: details.userData.subscription,
+      },
+      [userInfo]
+    );
+
+    return;
+  };
+
+  useEffect(() => {
+    var details = fetchDetails();
+    console.log(userInfo.Username);
+    console.log(userInfo.EmailAddress);
+    console.log(userInfo.MemberSince);
+    console.log(userInfo.HoursPlayed);
+    console.log(userInfo.Subscription);
+  });
 
   return (
     <div className="container emp-profile">

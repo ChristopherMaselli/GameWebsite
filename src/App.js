@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <Header />
       <Menu />
-      <div>{localStorage.getItem("Settings") ? <Home /> : <UserProfile />}</div>
+      <div>{localStorage.getItem("Settings") ? <UserProfile /> : <Home />}</div>
 
       <Footer />
     </div>
