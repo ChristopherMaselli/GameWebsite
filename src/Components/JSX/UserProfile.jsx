@@ -8,9 +8,11 @@ import * as userService from "../../Services/userService";
 const UserProfile = (props) => {
   const [userInfo, setUserInfo] = useState({
     username: "",
+    emailAddress: "",
     memberSince: "",
     hoursPlayed: "",
     subscription: "",
+    details: "",
   });
 
   const fetchDetails = async () => {
@@ -19,32 +21,34 @@ const UserProfile = (props) => {
       token: token,
     };
 
-    var details = await axios.post(
+    var details = await axios.get(
       "https://localhost:5001/api/Data/UserProfile",
-      obj
+      {
+        params: {
+          token: token,
+        },
+      }
     );
 
     setUserInfo(
       {
-        Username: details.userName,
-        EmailAddress: details.EmailAddress,
-        MemberSince: details.userData.memberSince,
-        HoursPlayed: details.userData.hoursPlayed,
-        Subscription: details.userData.subscription,
+        username: details.data.username,
+        emailAddress: details.data.emailAddress,
+        memberSince: details.data.userData.MemberSince,
+        hoursPlayed: details.data.userData.HoursPlayed,
+        subscription: details.data.userData.Subscription,
       },
       [userInfo]
     );
-
     return;
   };
 
+  const consoleShow = () => {
+    console.log(userInfo);
+  };
+
   useEffect(() => {
-    var details = fetchDetails();
-    console.log(userInfo.Username);
-    console.log(userInfo.EmailAddress);
-    console.log(userInfo.MemberSince);
-    console.log(userInfo.HoursPlayed);
-    console.log(userInfo.Subscription);
+    //fetchDetails();
   });
 
   return (
@@ -65,7 +69,14 @@ const UserProfile = (props) => {
           </div>
           <div class="col-md-6">
             <div class="profile-head">
-              <h5>Kshiti Ghelani</h5>
+              <h5>{"userInfo.userName below"}</h5>
+              <h5>{userInfo.userName}</h5>
+              <Button variant="outline-primary" onClick={() => fetchDetails()}>
+                fetchDetails
+              </Button>{" "}
+              <Button variant="outline-primary" onClick={() => consoleShow()}>
+                ConsoleShow
+              </Button>{" "}
               <h6>Web Developer and Designer</h6>
               <p class="proile-rating">
                 RANKINGS : <span>8/10</span>
