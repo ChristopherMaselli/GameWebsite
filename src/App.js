@@ -13,12 +13,36 @@ import Home from "./Components/JSX/Home";
 import axios from "axios";
 
 function App() {
+  const [user, setUser] = useState({
+    LoggedIn: false,
+  });
+
+  const fetchLoginInfo = async () => {
+    var token = localStorage.getItem("Settings");
+    var details = await axios.get(
+      "https://localhost:5001/api/Data/UserProfile",
+      {
+        params: {
+          token: token,
+        },
+      }
+    );
+    setUser({
+      LoggedIn: details,
+    });
+  };
+
+  useEffect(() => {
+    fetchLoginInfo();
+  });
+
   return (
     <div className="App">
       <Header />
       <Menu />
-      <div>{localStorage.getItem("Settings") ? <UserProfile /> : <Home />}</div>
-
+      <div>
+        {setUser.LoggedIn} ? <UserProfile /> : <Home />}
+      </div>
       <Footer />
     </div>
   );

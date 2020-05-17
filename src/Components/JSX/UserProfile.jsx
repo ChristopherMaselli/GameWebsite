@@ -32,7 +32,7 @@ const UserProfile = (props) => {
 
     setUserInfo(
       {
-        username: details.data.username,
+        userName: details.data.username,
         emailAddress: details.data.emailAddress,
         memberSince: details.data.userData.MemberSince,
         hoursPlayed: details.data.userData.HoursPlayed,
@@ -48,7 +48,7 @@ const UserProfile = (props) => {
   };
 
   useEffect(() => {
-    //fetchDetails();
+    fetchDetails();
   });
 
   return (
@@ -69,14 +69,6 @@ const UserProfile = (props) => {
           </div>
           <div class="col-md-6">
             <div class="profile-head">
-              <h5>{"userInfo.userName below"}</h5>
-              <h5>{userInfo.userName}</h5>
-              <Button variant="outline-primary" onClick={() => fetchDetails()}>
-                fetchDetails
-              </Button>{" "}
-              <Button variant="outline-primary" onClick={() => consoleShow()}>
-                ConsoleShow
-              </Button>{" "}
               <h6>Web Developer and Designer</h6>
               <p class="proile-rating">
                 RANKINGS : <span>8/10</span>
@@ -152,10 +144,10 @@ const UserProfile = (props) => {
               >
                 <div class="row">
                   <div class="col-md-6">
-                    <label>User Id</label>
+                    <label>Subscription</label>
                   </div>
                   <div class="col-md-6">
-                    <p>Kshiti123</p>
+                    <p>{userInfo.subscription}</p>
                   </div>
                 </div>
                 <div class="row">
@@ -163,7 +155,7 @@ const UserProfile = (props) => {
                     <label>Name</label>
                   </div>
                   <div class="col-md-6">
-                    <p>Kshiti Ghelani</p>
+                    <p>{userInfo.userName}</p>
                   </div>
                 </div>
                 <div class="row">
@@ -171,23 +163,23 @@ const UserProfile = (props) => {
                     <label>Email</label>
                   </div>
                   <div class="col-md-6">
-                    <p>kshitighelani@gmail.com</p>
+                    <p>{userInfo.emailAddress}</p>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <label>Phone</label>
+                    <label>Member Since</label>
                   </div>
                   <div class="col-md-6">
-                    <p>123 456 7890</p>
+                    <p>{userInfo.memberSince}</p>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <label>Profession</label>
+                    <label>Hours Played</label>
                   </div>
                   <div class="col-md-6">
-                    <p>Web Developer and Designer</p>
+                    <p>{userInfo.hoursPlayed}</p>
                   </div>
                 </div>
               </div>
