@@ -1,0 +1,25 @@
+.Header {
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  border-style: solid;
+  border-color: goldenrod;
+  border-radius: 5px;
+  line-height: 0px;
+  width: 95%;
+  position: relative;
+  margin-left: 2.5%;
+}
+
+.banner {
+  height: 75px;
+  width: 405px;
+  /* border-radius: 5px; */
+}
+
+.ad {
+  height: 75px;
+  width: 700px;
+  /* border-radius: 5px; */
+}

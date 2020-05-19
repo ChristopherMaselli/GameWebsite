@@ -40,9 +40,7 @@ function App() {
     <div className="App">
       <Header />
       <Menu />
-      <div>
-        {setUser.LoggedIn} ? <UserProfile /> : <Home />}
-      </div>
+      <div>{setUser.LoggedIn ? <Home /> : <LoginRegistration />}</div>
       <Footer />
     </div>
   );

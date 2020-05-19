@@ -4,36 +4,21 @@ import { useState } from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import axios from "axios";
 import * as userService from "../../Services/userService";
+import banner from "./../../static/banner.jpg";
+import ad from "./../../static/ad.jpg";
+import "./../CSS/Header.css";
+import { Link } from "react-router-dom";
 
 const Header = (props) => {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="mr-auto">
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
-          <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              Another action
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-              Separated link
-            </NavDropdown.Item>
-          </NavDropdown>
-        </Nav>
-        <Nav>
-          <Nav.Link href="#deets">More deets</Nav.Link>
-          <Nav.Link eventKey={2} href="#memes">
-            Dank memes
-          </Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <div collapseOnSelect bg="alpha" variant="dark" className="Header">
+      <Link to="#home">
+        <img src={banner} className="banner" alt="Banner image" />
+      </Link>
+      <Link to="#home">
+        <img src={ad} className="ad" alt="Ads go here" />
+      </Link>
+    </div>
   );
 };
 

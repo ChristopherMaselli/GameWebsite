@@ -4,14 +4,21 @@ import { useState } from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import axios from "axios";
 import * as userService from "../../Services/userService";
+import "./../CSS/Menu.css";
 
 const GamesProfile = (props) => {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+    <Navbar
+      className="Menu"
+      collapseOnSelect
+      expand="lg"
+      bg="alpha"
+      variant="light"
+    >
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
+          <Nav.Link href="#home">Home</Nav.Link>
           <Nav.Link href="#features">Features</Nav.Link>
           <Nav.Link href="#pricing">Pricing</Nav.Link>
           <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
