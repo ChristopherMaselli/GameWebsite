@@ -10,7 +10,7 @@
 
 .Menu {
   margin-bottom: 0px;
-  margin-top: 0px;
+  margin-top: -0.2%;
   padding-bottom: 0px;
   padding-top: 0px;
   border-style: solid;
@@ -18,7 +18,19 @@
   border-radius: 5px;
   line-height: 15px;
   width: 95%;
-
   position: relative;
   margin-left: 2.5%;
+  background-color: black;
+}
+
+.MenuItem {
+  color: goldenrod !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: goldenrod !important;
+}
+
+.dropdown-menu {
+  background-color: black !important;
 }

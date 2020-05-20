@@ -1,3 +1,8 @@
+.headerWrapper {
+  height: 17.5vh;
+  width: 100%;
+}
+
 .Header {
   margin-bottom: 0px;
   margin-top: 0px;
@@ -7,19 +12,20 @@
   border-color: goldenrod;
   border-radius: 5px;
   line-height: 0px;
+  height: 100%;
   width: 95%;
   position: relative;
   margin-left: 2.5%;
 }
 
 .banner {
-  height: 75px;
-  width: 405px;
+  height: 100%;
+  width: 38%;
   /* border-radius: 5px; */
 }
 
 .ad {
-  height: 75px;
-  width: 700px;
+  height: 100%;
+  width: 62%;
   /* border-radius: 5px; */
 }

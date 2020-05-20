@@ -11,13 +11,15 @@ import { Link } from "react-router-dom";
 
 const Header = (props) => {
   return (
-    <div collapseOnSelect bg="alpha" variant="dark" className="Header">
-      <Link to="#home">
-        <img src={banner} className="banner" alt="Banner image" />
-      </Link>
-      <Link to="#home">
-        <img src={ad} className="ad" alt="Ads go here" />
-      </Link>
+    <div className="headerWrapper">
+      <div collapseOnSelect bg="alpha" variant="dark" className="Header">
+        <Link to="#home">
+          <img src={banner} className="banner" alt="Banner image" />
+        </Link>
+        <Link to="#home">
+          <img src={ad} className="ad" alt="Ads go here" />
+        </Link>
+      </div>
     </div>
   );
 };
