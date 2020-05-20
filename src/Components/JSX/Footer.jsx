@@ -9,7 +9,7 @@ import {
 
 const Footer = (props) => {
   return (
-    <div className="fixed-bottom">
+    <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
