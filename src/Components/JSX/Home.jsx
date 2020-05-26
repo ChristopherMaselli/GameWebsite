@@ -24,8 +24,6 @@ const Home = (props) => {
       "https://localhost:5001/api/Data/UserProfile",
       obj
     );
-
-    console.log(token);
   };
 
   return (

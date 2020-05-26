@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import { useState } from "react";
 import "../CSS/LoginRegistration.css";
 import { Button, Col, Form } from "react-bootstrap";
@@ -12,6 +13,7 @@ const LoginRegistration = (props) => {
     emailAddress: "",
     usernameLogin: "",
     passwordLogin: "",
+    toHome: false,
   });
 
   const handleChange = (e) => {
@@ -32,6 +34,14 @@ const LoginRegistration = (props) => {
 
     var token = await axios.post("https://localhost:5001/api/Login", obj);
     localStorage.setItem("Settings", token.data["token"]);
+    if (
+      localStorage.getItem("Settings") == token.data["token"] &&
+      localStorage.getItem("Settings") != null
+    ) {
+      {
+        setUserInfo({ toHome: true });
+      }
+    }
   };
 
   const handleRegister = async () => {
@@ -72,6 +82,7 @@ const LoginRegistration = (props) => {
 
   return (
     <div className="container">
+      <div>{userInfo.toHome == true ? <Redirect to="/Home" /> : null}</div>
       <header>
         <h1>Login and Registration Form</h1>
       </header>
