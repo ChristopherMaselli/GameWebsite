@@ -30,6 +30,8 @@ function App() {
     setUser({
       LoggedIn: details,
     });
+    console.log(localStorage.getItem("Settings"));
+    console.log(user.LoggedIn);
   };
 
   useEffect(() => {
@@ -40,7 +42,7 @@ function App() {
     <div className="App">
       <Header />
       <Menu />
-      <div>{setUser.LoggedIn ? <Home /> : <LoginRegistration />}</div>
+      <div>{(user.LoggedIn = true ? <Home /> : <LoginRegistration />)}</div>
       <Footer />
     </div>
   );
