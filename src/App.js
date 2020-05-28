@@ -42,7 +42,7 @@ function App() {
     <div className="App">
       <Header />
       <Menu />
-      <div>{(user.LoggedIn = true ? <Home /> : <LoginRegistration />)}</div>
+      <div>{(user.LoggedIn = true ? <LoginRegistration /> : <Home />)}</div>
       <Footer />
     </div>
   );
