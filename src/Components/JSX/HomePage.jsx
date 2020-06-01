@@ -1,15 +1,17 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import axios from "axios";
-import Home from "./Home";
 import LoginRegistration from "./LoginRegistration";
 
-export default function HomePage() {
+export default function HomePage(props) {
   const [user, setUser] = useState({
     LoggedIn: false,
   });
+
   const fetchLoginInfo = async () => {
+    /*
     var token = localStorage.getItem("Settings");
     if ((token = null)) {
       return;
@@ -26,19 +28,17 @@ export default function HomePage() {
       }
       console.log(localStorage.getItem("LoggedIn"));
     }
-  };
+    */
 
+    if (localStorage.getItem("LoggedIn")) {
+      props.history.push("/Login");
+    } else {
+      props.history.push("/Home");
+    }
+  };
   useEffect(() => {
     fetchLoginInfo();
   });
 
-  return (
-    <div>
-      {localStorage.getItem("LoggedIn") == true ? (
-        <Route path="/Home" exact component={Home} />
-      ) : (
-        <Route path="/Login" exact component={LoginRegistration} />
-      )}
-    </div>
-  );
+  return <div></div>;
 }
