@@ -7,10 +7,14 @@ import LoginRegistration from "./LoginRegistration";
 
 export default function HomePage(props) {
   const handleCredentials = async () => {
-    var token = localStorage.get("Settings");
+    var token = localStorage.getItem("Settings");
+    const obj = {
+      token: token,
+    };
+
     var details = await axios.post(
       "https://localhost:5001/api/Authentication/Authenticate",
-      token
+      obj
     );
 
     if (details != null) {
@@ -21,7 +25,7 @@ export default function HomePage(props) {
   };
 
   useEffect(() => {
-    if (localStorage.get("Settings") != null) {
+    if (localStorage.getItem("Settings") != null) {
       handleCredentials();
     } else {
       props.history.replace("/Login");
