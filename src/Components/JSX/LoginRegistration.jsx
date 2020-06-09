@@ -56,7 +56,12 @@ const LoginRegistration = (props) => {
       obj
     );
 
-    console.log(response.data);
+    setUserInfo({
+      usernameLogin: userInfo.usernameReg,
+      passwordLogin: userInfo.passwordReg,
+    });
+
+    handleLogin();
   };
 
   const handleSubmit = async (e) => {
@@ -115,6 +120,7 @@ const LoginRegistration = (props) => {
                     required="required"
                     ref={passwordLoginRef}
                     value={userInfo.passwordLogin}
+                    type="password"
                     placeholder="eg. X8df!90EO"
                     onChange={(passwordLoginRef) =>
                       handleChange(passwordLoginRef)
@@ -183,6 +189,7 @@ const LoginRegistration = (props) => {
                     required="required"
                     ref={passwordRegRef}
                     value={userInfo.passwordReg}
+                    type="password"
                     placeholder="eg. X8df!90EO"
                     onChange={(passwordRegRef) => handleChange(passwordRegRef)}
                   />
