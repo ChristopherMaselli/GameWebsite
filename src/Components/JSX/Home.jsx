@@ -7,6 +7,14 @@ import * as userService from "../../Services/userService";
 import "../CSS/Home.css";
 
 const Home = (props) => {
+  const wipeToken = async () => {
+    localStorage.removeItem("Settings");
+  };
+
+  const showToken = async () => {
+    localStorage.getItem("Settings");
+  };
+
   const fetchMyToken = async () => {
     /*
 
@@ -38,6 +46,8 @@ const Home = (props) => {
               fermentum massa justo sit amet risus. Etiam porta sem malesuada
               magna mollis euismod. Donec sed odio dui.{" "}
             </p>
+            <Button onClick={() => wipeToken()}>TokenWipe</Button>
+            <Button onClick={() => showToken()}>TokenShow</Button>
             <p>
               <a
                 class="btn btn-secondary"

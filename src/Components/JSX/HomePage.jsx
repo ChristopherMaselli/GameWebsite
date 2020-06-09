@@ -6,39 +6,26 @@ import axios from "axios";
 import LoginRegistration from "./LoginRegistration";
 
 export default function HomePage(props) {
-  const [user, setUser] = useState({
-    LoggedIn: false,
-  });
+  const handleCredentials = async () => {
+    var token = localStorage.get("Settings");
+    var details = await axios.post(
+      "https://localhost:5001/api/Authentication/Authenticate",
+      token
+    );
 
-  const fetchLoginInfo = async () => {
-    /*
-    var token = localStorage.getItem("Settings");
-    if ((token = null)) {
-      return;
+    if (details != null) {
+      props.history.replace("/home");
     } else {
-      var details = await axios.get("https://localhost:5001/api/Login/Token", {
-        params: {
-          token: token,
-        },
-      });
-      if (details != null) {
-        localStorage.setItem("LoggedIn", true);
-      } else {
-        localStorage.setItem("LoggedIn", false);
-      }
-      console.log(localStorage.getItem("LoggedIn"));
-    }
-    */
-
-    if (localStorage.getItem("LoggedIn")) {
-      props.history.push("/Login");
-    } else {
-      props.history.push("/Home");
+      props.history.replace("/Login");
     }
   };
-  useEffect(() => {
-    fetchLoginInfo();
-  });
 
+  useEffect(() => {
+    if (localStorage.get("Settings") != null) {
+      handleCredentials();
+    } else {
+      props.history.replace("/Login");
+    }
+  });
   return <div></div>;
 }

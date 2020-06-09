@@ -13,7 +13,6 @@ const LoginRegistration = (props) => {
     emailAddress: "",
     usernameLogin: "",
     passwordLogin: "",
-    toHome: false,
   });
 
   const handleChange = (e) => {
@@ -32,15 +31,16 @@ const LoginRegistration = (props) => {
       password: userInfo.passwordLogin,
     };
 
-    var token = await axios.post("https://localhost:5001/api/Login", obj);
+    var token = await axios.post(
+      "https://localhost:5001/api/Authentication/Login",
+      obj
+    );
     localStorage.setItem("Settings", token.data["token"]);
     if (
       localStorage.getItem("Settings") == token.data["token"] &&
       localStorage.getItem("Settings") != null
     ) {
-      {
-        setUserInfo({ toHome: true });
-      }
+      props.history.replace("/Home");
     }
   };
 
@@ -52,7 +52,7 @@ const LoginRegistration = (props) => {
     };
 
     var response = await axios.post(
-      "https://localhost:5001/api/Registration",
+      "https://localhost:5001/api/Authentication/Registration",
       obj
     );
 
@@ -82,7 +82,6 @@ const LoginRegistration = (props) => {
 
   return (
     <div className="container">
-      <div>{userInfo.toHome == true ? <Redirect to="/Home" /> : null}</div>
       <header>
         <h1>Login and Registration Form</h1>
       </header>

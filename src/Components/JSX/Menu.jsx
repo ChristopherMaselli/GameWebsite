@@ -70,7 +70,7 @@ const GamesProfile = (props) => {
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <Button href="/Home">Login</Button>
+              <Button href="/Login">Login</Button>
             )}
           </Nav>
         </Nav>
