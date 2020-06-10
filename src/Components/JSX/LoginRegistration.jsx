@@ -15,32 +15,41 @@ const LoginRegistration = (props) => {
     passwordLogin: "",
   });
 
+  const [errorInfo, setErrorInfo] = useState({
+    error: false,
+  });
+
   const handleChange = (e) => {
     const tempUserInfo = { ...userInfo };
-    //const value = e.currentTarget.value;
     const value = e.currentTarget.value;
     const name = e.currentTarget.name;
-    //tempFormInfo[name] = value;
     tempUserInfo[name] = value;
     setUserInfo(tempUserInfo);
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (loginInfo) => {
     const obj = {
-      username: userInfo.usernameLogin,
-      password: userInfo.passwordLogin,
+      username: loginInfo.usernameLogin,
+      password: loginInfo.passwordLogin,
     };
 
     var token = await axios.post(
       "https://localhost:5001/api/Authentication/Login",
       obj
     );
+
     localStorage.setItem("Settings", token.data["token"]);
     if (
       localStorage.getItem("Settings") == token.data["token"] &&
-      localStorage.getItem("Settings") != null
+      localStorage.getItem("Settings") != null &&
+      localStorage.getItem("Settings") != ""
     ) {
       props.history.replace("/Home");
+    } else {
+      setErrorInfo({
+        error: true,
+      });
+      localStorage.removeItem("Settings");
     }
   };
 
@@ -56,27 +65,13 @@ const LoginRegistration = (props) => {
       obj
     );
 
-    setUserInfo({
-      usernameLogin: userInfo.usernameReg,
-      passwordLogin: userInfo.passwordReg,
-    });
+    const tempUserInfo = { ...userInfo };
+    const username = userInfo.usernameReg;
+    const password = userInfo.passwordReg;
+    tempUserInfo["usernameLogin"] = username;
+    tempUserInfo["passwordLogin"] = password;
 
-    handleLogin();
-  };
-
-  const handleSubmit = async (e) => {
-    console.log(e.currentTarget.name);
-    //userService.register(this.state.data);
-
-    /*
-    const obj = {
-      user = username,
-      password = password,
-      email = email,
-    }
-    */
-
-    //await axios.post("https://localhost:5001/api/UserModel/", obj);
+    handleLogin(tempUserInfo);
   };
 
   const usernameRegRef = React.createRef();
@@ -127,7 +122,12 @@ const LoginRegistration = (props) => {
                     }
                   />
                 </Form.Group>
-                <Button variant="primary" onClick={handleLogin}>
+                {errorInfo.error == true && (
+                  <div className="alert alert-danger">
+                    Username or Password is incorrect
+                  </div>
+                )}
+                <Button variant="primary" onClick={() => handleLogin(userInfo)}>
                   Log in
                 </Button>
                 <p className="keeplogin">
