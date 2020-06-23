@@ -51,8 +51,8 @@ const Menu = (props) => {
             title="Dropdown"
             id="collasible-nav-dropdown"
           >
-            <NavDropdown.Item className="MenuItem" href="#action/3.1">
-              Action
+            <NavDropdown.Item className="MenuItem" href="/User">
+              Userpage
             </NavDropdown.Item>
             <NavDropdown.Item className="MenuItem" href="#action/3.2">
               Another action

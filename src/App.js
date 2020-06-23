@@ -52,8 +52,20 @@ function App() {
           />
           <Route path="/User" exact component={UserProfile} />
           <Route path="/Home" exact component={Home} />
-          <Route path="/" exact component={HomePage} />
-          <Route path="" exact component={HomePage} />
+          <Route
+            path="/"
+            exact
+            component={() => (
+              <HomePage onChangedLogin={(value) => handleLoggedIn(value)} />
+            )}
+          />
+          <Route
+            path=""
+            exact
+            component={() => (
+              <HomePage onChangedLogin={(value) => handleLoggedIn(value)} />
+            )}
+          />
           <Redirect to="/not-found" />
         </Switch>
       </div>

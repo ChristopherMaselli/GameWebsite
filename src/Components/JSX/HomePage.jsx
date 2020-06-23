@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import axios from "axios";
 import LoginRegistration from "./LoginRegistration";
 
-export default function HomePage(props) {
+const HomePage = (props) => {
   const handleCredentials = async () => {
     var token = localStorage.getItem("Settings");
     const obj = {
@@ -18,8 +18,10 @@ export default function HomePage(props) {
     );
 
     if (details != null) {
+      props.onChangedLogin(true);
       props.history.replace("/home");
     } else {
+      props.onChangedLogin(false);
       props.history.replace("/Login");
     }
   };
@@ -35,4 +37,5 @@ export default function HomePage(props) {
     }
   });
   return <div></div>;
-}
+};
+export default withRouter(HomePage);
