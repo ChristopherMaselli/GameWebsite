@@ -5,18 +5,26 @@ import "../CSS/LoginRegistration.css";
 import { Button, Col, Form } from "react-bootstrap";
 import axios from "axios";
 import * as userService from "../../Services/userService";
+import { withRouter } from "react-router-dom";
 
 const LoginRegistration = (props) => {
   const [userInfo, setUserInfo] = useState({
     usernameReg: "",
     passwordReg: "",
     emailAddress: "",
-    usernameLogin: "",
+    usernameEmailLogin: "",
     passwordLogin: "",
   });
 
   const [errorInfo, setErrorInfo] = useState({
-    error: false,
+    invalidLogin: false,
+    invalidRegUsername: false,
+    invalidRegEmail: false,
+    invalidRegPassword: false,
+    loginMessage: "",
+    usernameRegMessage: "",
+    emailRegMessage: "",
+    passwordRegMessage: "",
   });
 
   const handleChange = (e) => {
@@ -29,8 +37,9 @@ const LoginRegistration = (props) => {
 
   const handleLogin = async (loginInfo) => {
     const obj = {
-      username: loginInfo.usernameLogin,
+      username: loginInfo.usernameEmailLogin,
       password: loginInfo.passwordLogin,
+      emailAddress: loginInfo.usernameEmailLogin,
     };
 
     var token = await axios.post(
@@ -44,16 +53,28 @@ const LoginRegistration = (props) => {
       localStorage.getItem("Settings") != null &&
       localStorage.getItem("Settings") != ""
     ) {
+      props.onChangedLogin(true);
       props.history.replace("/Home");
     } else {
-      setErrorInfo({
-        error: true,
-      });
+      const tempErrorInfo = { ...errorInfo };
+      tempErrorInfo["invalidLogin"] = true;
+      tempErrorInfo["loginMessage"] = "Username or Password is Incorrect";
+      setErrorInfo(tempErrorInfo);
       localStorage.removeItem("Settings");
     }
   };
 
   const handleRegister = async () => {
+    /*
+    if (emailVerify(userInfo.emailAddress) == false) {
+      const tempErrorInfo = { ...errorInfo };
+      tempErrorInfo["invalidRegUsername"] = true;
+      tempErrorInfo["usernameRegMessage"] = "Please enter a valid Email";
+      setErrorInfo(tempErrorInfo);
+      return;
+    }
+    */
+
     const obj = {
       username: userInfo.usernameReg,
       password: userInfo.passwordReg,
@@ -65,10 +86,28 @@ const LoginRegistration = (props) => {
       obj
     );
 
+    //alert(response.data);
+
+    if (response.data == "Username is Taken") {
+      const tempErrorInfo = { ...errorInfo };
+      tempErrorInfo["invalidRegUsername"] = true;
+      tempErrorInfo["usernameRegMessage"] = "Username is Taken";
+      setErrorInfo(tempErrorInfo);
+      return;
+    }
+
+    if (response.data == "Email is Taken") {
+      const tempErrorInfo = { ...errorInfo };
+      tempErrorInfo["invalidRegEmail"] = true;
+      tempErrorInfo["emailRegMessage"] = "Email is Taken";
+      setErrorInfo(tempErrorInfo);
+      return;
+    }
+
     const tempUserInfo = { ...userInfo };
     const username = userInfo.usernameReg;
     const password = userInfo.passwordReg;
-    tempUserInfo["usernameLogin"] = username;
+    tempUserInfo["usernameEmailLogin"] = username;
     tempUserInfo["passwordLogin"] = password;
 
     handleLogin(tempUserInfo);
@@ -77,7 +116,7 @@ const LoginRegistration = (props) => {
   const usernameRegRef = React.createRef();
   const passwordRegRef = React.createRef();
   const emailRef = React.createRef();
-  const usernameLoginRef = React.createRef();
+  const usernameEmailLoginRef = React.createRef();
   const passwordLoginRef = React.createRef();
 
   return (
@@ -97,13 +136,13 @@ const LoginRegistration = (props) => {
                   <Form.Label>Your email or username</Form.Label>
                   <Form.Control
                     as="input"
-                    name="usernameLogin"
+                    name="usernameEmailLogin"
                     required="required"
-                    ref={usernameLoginRef}
-                    value={userInfo.usernameLogin}
+                    ref={usernameEmailLoginRef}
+                    value={userInfo.usernameEmailLogin}
                     placeholder="myusername or mymail@mail.com"
-                    onChange={(usernameLoginRef) =>
-                      handleChange(usernameLoginRef)
+                    onChange={(usernameEmailLoginRef) =>
+                      handleChange(usernameEmailLoginRef)
                     }
                   />
                 </Form.Group>
@@ -122,9 +161,9 @@ const LoginRegistration = (props) => {
                     }
                   />
                 </Form.Group>
-                {errorInfo.error == true && (
+                {errorInfo.invalidLogin == true && (
                   <div className="alert alert-danger">
-                    Username or Password is incorrect
+                    {errorInfo.loginMessage}
                   </div>
                 )}
                 <Button variant="primary" onClick={() => handleLogin(userInfo)}>
@@ -167,7 +206,11 @@ const LoginRegistration = (props) => {
                     onChange={(usernameRegRef) => handleChange(usernameRegRef)}
                   />
                 </Form.Group>
-
+                {errorInfo.invalidRegUsername == true && (
+                  <div className="alert alert-danger">
+                    {errorInfo.usernameRegMessage}
+                  </div>
+                )}
                 <Form.Group controlId="RegisterEmail">
                   <Form.Label className="youmail"> Your email</Form.Label>
                   <Form.Control
@@ -180,7 +223,11 @@ const LoginRegistration = (props) => {
                     onChange={(emailRef) => handleChange(emailRef)}
                   />
                 </Form.Group>
-
+                {errorInfo.invalidRegEmail == true && (
+                  <div className="alert alert-danger">
+                    {errorInfo.emailRegMessage}
+                  </div>
+                )}
                 <Form.Group controlId="RegisterPassword">
                   <Form.Label className="youpasswd">Your password </Form.Label>
                   <Form.Control
@@ -194,7 +241,11 @@ const LoginRegistration = (props) => {
                     onChange={(passwordRegRef) => handleChange(passwordRegRef)}
                   />
                 </Form.Group>
-
+                {errorInfo.invalidRegPassword == true && (
+                  <div className="alert alert-danger">
+                    {errorInfo.passwordRegMessage}
+                  </div>
+                )}
                 <Button variant="primary" onClick={handleRegister}>
                   SignUp
                 </Button>
@@ -214,4 +265,4 @@ const LoginRegistration = (props) => {
   );
 };
 
-export default LoginRegistration;
+export default withRouter(LoginRegistration);

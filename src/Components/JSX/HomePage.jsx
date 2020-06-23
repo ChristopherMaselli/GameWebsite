@@ -25,7 +25,10 @@ export default function HomePage(props) {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("Settings") != null) {
+    if (
+      localStorage.getItem("Settings") != null &&
+      localStorage.getItem("Settings") != ""
+    ) {
       handleCredentials();
     } else {
       props.history.replace("/Login");

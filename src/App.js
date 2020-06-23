@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -12,14 +13,43 @@ import Header from "./Components/JSX/Header";
 import Footer from "./Components/JSX/Footer";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState({
+    loggedIn: false,
+  });
+
+  const handleLoggedIn = (value) => {
+    setLoggedIn({
+      loggedIn: value,
+    });
+  };
+
   return (
     <div className="App">
       <Header />
-      <Menu />
+      <Menu
+        loggedIn={loggedIn.loggedIn}
+        onChangedLogin={(value) => handleLoggedIn(value)}
+      />
       <div>
         <Switch>
-          <Route path="/Login" exact component={LoginRegistration} />
-          <Route path="/Registration" exact component={LoginRegistration} />
+          <Route
+            path="/Login"
+            exact
+            component={() => (
+              <LoginRegistration
+                onChangedLogin={(value) => handleLoggedIn(value)}
+              />
+            )}
+          />
+          <Route
+            path="/Registration"
+            exact
+            component={() => (
+              <LoginRegistration
+                onChangedLogin={(value) => handleLoggedIn(value)}
+              />
+            )}
+          />
           <Route path="/User" exact component={UserProfile} />
           <Route path="/Home" exact component={Home} />
           <Route path="/" exact component={HomePage} />

@@ -12,7 +12,7 @@ const Home = (props) => {
   };
 
   const showToken = async () => {
-    localStorage.getItem("Settings");
+    alert(localStorage.getItem("Settings"));
   };
 
   const fetchMyToken = async () => {

@@ -1,12 +1,37 @@
 import React from "react";
 import { Navbar, NavDropdown, Nav } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import axios from "axios";
 import * as userService from "../../Services/userService";
 import "./../CSS/Menu.css";
+import { withRouter } from "react-router-dom";
 
-const GamesProfile = (props) => {
+const Menu = (props) => {
+  const isLoggedIn = async () => {
+    if (
+      localStorage.getItem("Settings") != null &&
+      localStorage.getItem("Settings") != ""
+    ) {
+      //props.onChangedLogin();
+    }
+  };
+
+  const logOut = () => {
+    localStorage.removeItem("Settings");
+    props.onChangedLogin(false);
+    props.history.replace("/Login");
+  };
+
+  //const alertMe = () => {
+  //props.onChangedLogin(true);
+  //alert(localStorage.getItem("Settings"));
+  //};
+
+  useEffect(() => {
+    isLoggedIn();
+  });
+
   return (
     <Navbar className="Menu" collapseOnSelect expand="lg" bg="black">
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -46,7 +71,7 @@ const GamesProfile = (props) => {
             More deets
           </Nav.Link>
           <Nav className="MenuItem" eventKey={2}>
-            {localStorage.getItem("Settings") ? (
+            {props.loggedIn == true ? (
               <NavDropdown
                 className="MenuItem"
                 title="Dropdown"
@@ -62,15 +87,12 @@ const GamesProfile = (props) => {
                   Something
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item
-                  className="MenuItem"
-                  href="/LoginRegistration"
-                >
+                <NavDropdown.Item className="MenuItem" onClick={() => logOut()}>
                   Log Out
                 </NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <Button href="/Login">Login</Button>
+              <Button href="/LoginRegistration">Login</Button>
             )}
           </Nav>
         </Nav>
@@ -79,4 +101,4 @@ const GamesProfile = (props) => {
   );
 };
 
-export default GamesProfile;
+export default withRouter(Menu);
