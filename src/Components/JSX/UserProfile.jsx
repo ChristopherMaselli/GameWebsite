@@ -29,14 +29,14 @@ const UserProfile = (props) => {
         },
       }
     );
-
+    console.log(details);
     setUserInfo(
       {
         userName: details.data.username,
         emailAddress: details.data.emailAddress,
-        memberSince: details.data.userData.MemberSince,
-        hoursPlayed: details.data.userData.HoursPlayed,
-        subscription: details.data.userData.Subscription,
+        memberSince: details.data.MemberSince,
+        hoursPlayed: details.data.HoursPlayed,
+        subscription: details.data.Subscription,
       },
       [userInfo]
     );
