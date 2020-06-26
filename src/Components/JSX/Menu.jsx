@@ -13,7 +13,9 @@ const Menu = (props) => {
       localStorage.getItem("Settings") != null &&
       localStorage.getItem("Settings") != ""
     ) {
-      //props.onChangedLogin();
+      props.onChangedLogin(true);
+    } else {
+      props.onChangedLogin(false);
     }
   };
 
@@ -23,6 +25,10 @@ const Menu = (props) => {
     props.history.replace("/Login");
   };
 
+  const showToken = () => {
+    alert(localStorage.getItem("Settings"));
+  };
+
   //const alertMe = () => {
   //props.onChangedLogin(true);
   //alert(localStorage.getItem("Settings"));
@@ -30,7 +36,7 @@ const Menu = (props) => {
 
   useEffect(() => {
     isLoggedIn();
-  });
+  }, []);
 
   return (
     <Navbar className="Menu" collapseOnSelect expand="lg" bg="black">
@@ -67,7 +73,7 @@ const Menu = (props) => {
           </NavDropdown>
         </Nav>
         <Nav>
-          <Nav.Link className="MenuItem" href="#deets">
+          <Nav.Link className="MenuItem" onClick={() => showToken()}>
             More deets
           </Nav.Link>
           <Nav className="MenuItem" eventKey={2}>
@@ -77,8 +83,8 @@ const Menu = (props) => {
                 title="Dropdown"
                 id="collasible-nav-dropdown"
               >
-                <NavDropdown.Item className="MenuItem" href="#action/3.1">
-                  Action
+                <NavDropdown.Item className="MenuItem" href="/User">
+                  User Profile
                 </NavDropdown.Item>
                 <NavDropdown.Item className="MenuItem" href="#action/3.2">
                   Another action

@@ -49,7 +49,7 @@ const UserProfile = (props) => {
 
   useEffect(() => {
     fetchDetails();
-  });
+  }, []);
 
   return (
     <div className="container emp-profile">
