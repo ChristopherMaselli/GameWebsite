@@ -11,6 +11,8 @@ import Menu from "./Components/JSX/Menu";
 import Home from "./Components/JSX/Home";
 import Header from "./Components/JSX/Header";
 import Footer from "./Components/JSX/Footer";
+import Template from "./Components/JSX/Template";
+import MyGames from "./Components/JSX/MyGames";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState({
@@ -56,14 +58,16 @@ function App() {
             path="/"
             exact
             component={() => (
-              <HomePage onChangedLogin={(value) => handleLoggedIn(value)} />
+              //<HomePage onChangedLogin={(value) => handleLoggedIn(value)} />
+              <MyGames onChangedLogin={(value) => handleLoggedIn(value)} />
             )}
           />
           <Route
             path=""
             exact
             component={() => (
-              <HomePage onChangedLogin={(value) => handleLoggedIn(value)} />
+              //<HomePage onChangedLogin={(value) => handleLoggedIn(value)} />
+              <Template onChangedLogin={(value) => handleLoggedIn(value)} />
             )}
           />
           <Redirect to="/not-found" />
