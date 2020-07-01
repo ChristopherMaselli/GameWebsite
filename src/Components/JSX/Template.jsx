@@ -12,7 +12,6 @@ const Template = (props) => {
   });
 
   const handleCredentials = async () => {
-    console.log("Hi");
     var token = localStorage.getItem("Settings");
     const obj = {
       token: token,

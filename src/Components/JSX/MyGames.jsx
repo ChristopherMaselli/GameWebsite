@@ -25,7 +25,17 @@ const MyGames = (props) => {
     ],
   });
 
-  const getGamesDetails = () => {
+  const getGamesDetails = async () => {
+    var token = localStorage.getItem("Settings");
+    const obj = {
+      token: token,
+    };
+
+    var details = await axios.post(
+      "https://localhost:5001/api/Authentication/Authenticate",
+      obj
+    );
+
     //Get json list of the games
     //Deserialize into key/value pairs of w/e
     //loop through list and create list of game components with info filled in
