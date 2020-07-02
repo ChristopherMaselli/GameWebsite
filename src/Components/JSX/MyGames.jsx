@@ -32,9 +32,13 @@ const MyGames = (props) => {
     };
 
     var details = await axios.post(
-      "https://localhost:5001/api/Authentication/Authenticate",
+      "https://localhost:5001/api/Data/UserGames",
       obj
     );
+
+    var gamesArray = JSON.parse(details.data["gameList"]);
+
+    console.log(gamesArray);
 
     //Get json list of the games
     //Deserialize into key/value pairs of w/e
@@ -43,7 +47,9 @@ const MyGames = (props) => {
     //load the list like below
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getGamesDetails();
+  }, []);
 
   return (
     <div>
