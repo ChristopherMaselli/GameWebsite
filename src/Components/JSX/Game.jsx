@@ -5,10 +5,10 @@ const Game = (props) => {
   return (
     <div>
       <div>{props.title}</div>
-      <img src={props.Image} width="100" height="100"></img>
+      <img src={props.ImagePath} width="100" height="100"></img>
       <div>
-        Game Owner: {props.OwnerId}
-        When Created: {props.WhenCreated}
+        Game Owner: {props.owner}
+        When Created: {props.DateCreated}
         LastPlayed: {props.LastPlayed}
         Next Game Date: {props.NextGameDateTime}
       </div>

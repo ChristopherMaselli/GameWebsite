@@ -6,63 +6,72 @@ import axios from "axios";
 import LoginRegistration from "./LoginRegistration";
 import { ListGroup } from "react-bootstrap";
 import Game from "./Game";
+import { Next } from "react-bootstrap/PageItem";
 
 const MyGames = (props) => {
-  const [info, setInfo] = useState({
+  const [gameInfo, setGameInfo] = useState({
     items: [
       {
-        title: "FirstGame",
-        picture: "Whatever",
-      },
-      {
-        title: "FirstGame",
-        picture: "Whatever",
-      },
-      {
-        title: "FirstGame",
-        picture: "Whatever",
+        game: {
+          DateCreated: "2020-07-01T09:20:23.861733",
+          GameId: 1,
+          ImagePath: "https://cdn.wallpapersafari.com/41/15/xZomb3.jpg",
+          NextGameDateTime: "2020-07-01T09:20:23.861733",
+          OwnerId: 23,
+          Title: "ZoidysGame",
+          UserAccount: {
+            EmailAddress: "zoidy@gmail.com",
+            Id: 23,
+            Password: "Something",
+            UserName: "zoidy",
+          },
+        },
+        playerList: [],
       },
     ],
   });
 
-  const getGamesDetails = async () => {
-    var token = localStorage.getItem("Settings");
-    const obj = {
-      token: token,
+  useEffect(() => {
+    const getGamesDetails = async () => {
+      var token = localStorage.getItem("Settings");
+      const obj = {
+        token: token,
+      };
+
+      var details = await axios.post(
+        "https://localhost:5001/api/Data/UserGames",
+        obj
+      );
+
+      var gamesArray = JSON.parse(details.data["gameList"]);
+
+      console.log(gamesArray);
+
+      setGameInfo({ items: gamesArray });
+
+      console.log(gameInfo);
+      //Get json list of the games
+      //Deserialize into key/value pairs of w/e
+      //loop through list and create list of game components with info filled in
+      //put that list into an array into the state
+      //load the list like below
     };
 
-    var details = await axios.post(
-      "https://localhost:5001/api/Data/UserGames",
-      obj
-    );
-
-    var gamesArray = JSON.parse(details.data["gameList"]);
-
-    console.log(gamesArray);
-
-    //Get json list of the games
-    //Deserialize into key/value pairs of w/e
-    //loop through list and create list of game components with info filled in
-    //put that list into an array into the state
-    //load the list like below
-  };
-
-  useEffect(() => {
     getGamesDetails();
   }, []);
 
   return (
     <div>
       <div>
-        {info.items.map((item) => (
+        {gameInfo.items.map((item, index) => (
           <Game
-            key={item}
-            title={item.title}
-            owner="Chris"
-            ImagePath="XYZ"
-            WhenCreated="Now"
-            LastPlayed="Yesterday"
-            NextGameDateTime="Tomorrow"
+            key={index}
+            title={item.game.Title}
+            owner={item.game.OwnerId}
+            ImagePath={item.game.ImagePath}
+            DateCreated={item.game.DateCreated}
+            LastPlayed={item.game.LastPlayed}
+            NextGameDateTime={item.game.NextGameDateTime}
           ></Game>
         ))}
       </div>
