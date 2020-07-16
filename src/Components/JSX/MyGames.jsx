@@ -15,18 +15,37 @@ const MyGames = (props) => {
         game: {
           DateCreated: "2020-07-01T09:20:23.861733",
           GameId: 1,
-          ImagePath: "https://cdn.wallpapersafari.com/41/15/xZomb3.jpg",
+          ImagePath: "tps://cdn.walom/41ab3.jpg",
           NextGameDateTime: "2020-07-01T09:20:23.861733",
-          OwnerId: 23,
+          OwnerId: 24,
           Title: "ZoidysGame",
           UserAccount: {
             EmailAddress: "zoidy@gmail.com",
-            Id: 23,
+            Id: 24,
             Password: "Something",
             UserName: "zoidy",
           },
         },
-        playerList: [],
+        playerList: [
+          {
+            HoursPlayed: "3",
+            ImagePath:
+              "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.W-ERqZHcXsJ6s-qiAFfgJgAAAA%26pid%3DApi&f=1",
+            MemberSince: null,
+            Subscription: "Y",
+            UserAccount: null,
+            UserId: 18,
+          },
+          {
+            HoursPlayed: "3",
+            ImagePath:
+              "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.gKFu2_5XHUoWYMVHm1B02gAAAA%26pid%3DApi&f=1",
+            MemberSince: null,
+            Subscription: "Y",
+            UserAccount: null,
+            UserId: 18,
+          },
+        ],
       },
     ],
   });
@@ -72,6 +91,7 @@ const MyGames = (props) => {
             DateCreated={item.game.DateCreated}
             LastPlayed={item.game.LastPlayed}
             NextGameDateTime={item.game.NextGameDateTime}
+            playerList={item.playerList}
           ></Game>
         ))}
       </div>
