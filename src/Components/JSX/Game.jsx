@@ -30,7 +30,7 @@ const Game = (props) => {
         LastPlayed: {props.LastPlayed}
         Next Game Date: {props.NextGameDateTime}
       </div>
-      <div>
+      <span style={{ display: "flex", justifyContent: "center" }}>
         {props.playerList.map((player, index) => (
           <div key={index}>
             <Link to="/User">
@@ -38,7 +38,7 @@ const Game = (props) => {
             </Link>
           </div>
         ))}
-      </div>
+      </span>
     </div>
   );
 };
