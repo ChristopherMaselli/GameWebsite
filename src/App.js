@@ -13,11 +13,26 @@ import Header from "./Components/JSX/Header";
 import Footer from "./Components/JSX/Footer";
 import Template from "./Components/JSX/Template";
 import MyGames from "./Components/JSX/MyGames";
+import Checkout from "./Components/JSX/CheckoutItem";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(
+  "pk_test_51H6FiIHb4Zd1savwTK0cOSwm1RBaGobjRt76rfTwqjV7aJWyPDGNHxLImthtHFm5moimlmo1dn4VNekOj4d1e4Tb00qb57rpap"
+);
 
 function App() {
   const [loggedIn, setLoggedIn] = useState({
     loggedIn: false,
   });
+
+  const ELEMENTS_OPTIONS = {
+    fonts: [
+      {
+        cssSrc: "https://fonts.googleapis.com/css?family=Roboto",
+      },
+    ],
+  };
 
   const handleLoggedIn = (value) => {
     setLoggedIn({
@@ -34,6 +49,28 @@ function App() {
       />
       <div>
         <Switch>
+          <Route
+            path="/CheckoutItem"
+            exact
+            component={() => (
+              <div>
+                <Elements stripe={stripePromise}>
+                  <Checkout />
+                </Elements>
+              </div>
+            )}
+          />
+          <Route
+            path="/CheckoutSubscription"
+            exact
+            component={() => (
+              <div>
+                <Elements stripe={stripePromise}>
+                  <Checkout />
+                </Elements>
+              </div>
+            )}
+          />
           <Route
             path="/Login"
             exact
