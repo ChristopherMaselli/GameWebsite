@@ -13,7 +13,10 @@ import Header from "./Components/JSX/Header";
 import Footer from "./Components/JSX/Footer";
 import Template from "./Components/JSX/Template";
 import MyGames from "./Components/JSX/MyGames";
-import Checkout from "./Components/JSX/CheckoutItem";
+import CheckoutItem from "./Components/JSX/CheckoutItem";
+import CheckoutSubscription from "./Components/JSX/CheckoutSubscription";
+import AddCard from "./Components/JSX/AddCard";
+import Mail from "./Components/JSX/Mail";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -55,7 +58,7 @@ function App() {
             component={() => (
               <div>
                 <Elements stripe={stripePromise}>
-                  <Checkout />
+                  <CheckoutItem />
                 </Elements>
               </div>
             )}
@@ -66,9 +69,27 @@ function App() {
             component={() => (
               <div>
                 <Elements stripe={stripePromise}>
-                  <Checkout />
+                  <CheckoutSubscription />
                 </Elements>
               </div>
+            )}
+          />
+          <Route
+            path="/AddCard"
+            exact
+            component={() => (
+              <div>
+                <Elements stripe={stripePromise}>
+                  <AddCard />
+                </Elements>
+              </div>
+            )}
+          />
+          <Route
+            path="/Mail"
+            exact
+            component={() => (
+              <Mail onChangedLogin={(value) => handleLoggedIn(value)} />
             )}
           />
           <Route

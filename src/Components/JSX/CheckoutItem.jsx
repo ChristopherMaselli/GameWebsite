@@ -21,24 +21,6 @@ const CheckoutItem = (props) => {
   const stripe = useStripe();
   const elements = useElements();
 
-  useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    window
-      .fetch("https://localhost:5001/api/Stripe/PurchaseItem", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
-      })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setClientSecret(data.clientSecret);
-      });
-  }, []);
-
   const cardStyle = {
     hidePostalCode: true,
     style: {
@@ -78,65 +60,54 @@ const CheckoutItem = (props) => {
     }
   };
 
-  const handleChange = async (event) => {
-    // Listen for changes in the CardElement
-    // and display any errors as the customer types their card details
-    setDisabled(event.empty);
-    setError(event.error ? event.error.message : "");
-  };
+  const handleSubmit = async () => {
+    var token = localStorage.getItem("Settings");
+    const obj = {
+      token: token,
+    };
 
-  const handleSubmit = async (ev) => {
-    ev.preventDefault();
-    setProcessing(true);
-    const payload = await stripe.confirmCardPayment(clientSecret, {
-      //receipt_email: email,
-      payment_method: {
-        card: elements.getElement(CardElement),
-        billing_details: {
-          name: ev.target.name.value,
-        },
-      },
+    var json = JSON.stringify({
+      tokenVar: obj,
+      items: [
+        { id: "1", Qty: "3" },
+        { id: "2", Qty: "2" },
+      ],
     });
 
-    if (payload.error) {
-      setError(`Payment failed ${payload.error.message}`);
-      setProcessing(false);
-    } else {
-      setError(null);
-      setProcessing(false);
-      setSucceeded(true);
-    }
+    const objson = {
+      json: json,
+    };
+
+    var response = await axios.post(
+      "https://localhost:5001/api/Stripe/PurchaseItem",
+      objson
+    );
+
+    console.log(response);
+
+    const payload = await stripe
+      .confirmCardPayment(response.data.client_secret)
+      .then(function (result) {
+        //Handle error proccessing
+      });
   };
+
+  /*
+  if (payload.error) {
+    setError(`Payment failed ${payload.error.message}`);
+    setProcessing(false);
+  } else {
+    setError(null);
+    setProcessing(false);
+    setSucceeded(true);
+  }
+  */
 
   return (
     <div className="CheckoutWrapper">
-      <form id="payment-form" onSubmit={handleSubmit}>
-        <CardElement
-          id="card-element"
-          options={cardStyle}
-          onChange={handleChange}
-        />
-        <button disabled={processing || disabled || succeeded} id="submit">
-          <span id="button-text">
-            {processing ? <div className="spinner" id="spinner"></div> : "Pay"}
-          </span>
-        </button>
-        {/* Show any error that happens when processing the payment */}
-        {error && (
-          <div className="card-error" role="alert">
-            {error}
-          </div>
-        )}
-        {/* Show a success message upon completion */}
-        <p className={succeeded ? "result-message" : "result-message hidden"}>
-          Payment succeeded, see the result in your
-          <a href={`https://dashboard.stripe.com/test/payments`}>
-            {" "}
-            Stripe dashboard.
-          </a>{" "}
-          Refresh the page to pay again.
-        </p>
-      </form>
+      <button id="submit" onClick={handleSubmit}>
+        <span id="button-text">Pay</span>
+      </button>
     </div>
   );
 };
