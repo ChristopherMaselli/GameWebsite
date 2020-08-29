@@ -1,6 +1,7 @@
 body {
   /* background: -webkit-linear-gradient(left, #3931af, #00c6ff); */
-  background: url(https://wallpapercave.com/wp/SVhb78h.jpg);
+  /*background: url(https://wallpapercave.com/wp/SVhb78h.jpg);*/
+  background: url(https://static.vecteezy.com/system/resources/previews/000/151/795/original/hallway-matrix-background-vector.jpg);
   background-attachment: fixed;
   background-size: cover;
 }
@@ -43,4 +44,15 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+.UnityWindow {
+  border-left-width: 200px;
+  border-left-style: solid;
+  border-right-width: 200px;
+  border-right-style: solid;
+  border-top-width: 50px;
+  border-top-style: solid;
+  border-bottom-width: 50px;
+  border-bottom-style: solid;
 }

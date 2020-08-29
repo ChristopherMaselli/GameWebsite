@@ -24,9 +24,10 @@ const Mail = (props) => {
 
   const handleLogin = async (loginInfo) => {
     const obj = {
-      ToEmail: loginInfo.toEmail,
-      Subject: loginInfo.subject,
-      Body: loginInfo.body,
+      from: "Theoriginalchris1@gmail.com",
+      to: loginInfo.toEmail,
+      subject: loginInfo.subject,
+      body: loginInfo.body,
     };
     console.log(obj);
     var response = await axios.post(
@@ -97,6 +98,23 @@ const Mail = (props) => {
           </div>
         </div>
       </section>
+      <object
+        id="UnityObject"
+        classid="clsid:444785F1-DE89-4295-863A-D46C3A781394"
+        width="420"
+        height="750"
+        codebase="http://webplayer.unity3d.com/download_webplayer/UnityWebPlayer.cab#version=2,0,0,0"
+      >
+        <param name="unity3d" value="WebPlayer.unity3d" />
+        <embed
+          id="UnityEmbed"
+          src="mlpbeta/mlpbeta.unity3d"
+          width="420"
+          height="750"
+          type="application/vnd.unity"
+          pluginspage="http://www.unity3d.com/unity-web-player-2.x"
+        />
+      </object>
     </div>
   );
 };

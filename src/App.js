@@ -19,6 +19,7 @@ import AddCard from "./Components/JSX/AddCard";
 import Mail from "./Components/JSX/Mail";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import UnityGame from "./Components/Unity/UnityGame";
 
 const stripePromise = loadStripe(
   "pk_test_51H6FiIHb4Zd1savwTK0cOSwm1RBaGobjRt76rfTwqjV7aJWyPDGNHxLImthtHFm5moimlmo1dn4VNekOj4d1e4Tb00qb57rpap"
@@ -90,6 +91,13 @@ function App() {
             exact
             component={() => (
               <Mail onChangedLogin={(value) => handleLoggedIn(value)} />
+            )}
+          />
+          <Route
+            path="/UnityGame"
+            exact
+            component={() => (
+              <UnityGame onChangedLogin={(value) => handleLoggedIn(value)} />
             )}
           />
           <Route
