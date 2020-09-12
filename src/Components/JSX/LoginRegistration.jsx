@@ -43,7 +43,7 @@ const LoginRegistration = (props) => {
     };
 
     var token = await axios.post(
-      "https://localhost:5001/api/Authentication/Login",
+      "http://161.35.119.232:80/api/Authentication/Login",
       obj
     );
 
@@ -82,7 +82,7 @@ const LoginRegistration = (props) => {
     };
 
     var response = await axios.post(
-      "https://localhost:5001/api/Authentication/Registration",
+      "http://161.35.119.232:80/api/Authentication/Registration",
       obj
     );
 
